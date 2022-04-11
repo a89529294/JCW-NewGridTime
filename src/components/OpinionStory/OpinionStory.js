@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components/macro";
 import { QUERIES } from "../../constants";
 
-const OpinionStory = ({ id, title, author, avatar }) => {
+const OpinionStory = ({ id, title, author, avatar, className }) => {
   return (
-    <StyledLink href={`/story/${id}`}>
+    <StyledLink href={`/story/${id}`} className={className}>
       <Wrapper>
         <Avatar alt="" src={avatar} />
         <div>
@@ -52,10 +52,19 @@ const StyledLink = styled.a`
   &:not(:last-of-type) {
     padding-bottom: 16px;
     border-bottom: 1px solid var(--color-gray-300);
+
+    @media ${QUERIES.tabletOnly} {
+      padding-bottom: 0px;
+      border-bottom: none;
+    }
   }
 
   &:not(:first-of-type) {
     margin-top: 16px;
+
+    @media ${QUERIES.tabletOnly} {
+      margin-top: 0px;
+    }
   }
 `;
 

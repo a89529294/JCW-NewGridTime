@@ -1,26 +1,51 @@
-import React from 'react';
-import styled from 'styled-components/macro';
+import React from "react";
+import styled from "styled-components/macro";
 
 const SecondaryStory = ({ id, title, image, location, abstract }) => {
   return (
-    <a href={`/story/${id}`}>
+    <StyledLink href={`/story/${id}`}>
       <Wrapper>
         <Image alt={image.alt} src={image.src} />
         <Heading>{title}</Heading>
         <Abstract>{abstract}</Abstract>
       </Wrapper>
-    </a>
+    </StyledLink>
   );
 };
+
+const Abstract = styled.p`
+  grid-area: abstract;
+  font-size: 1rem;
+  white-space: pre-wrap;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+`;
 
 const Wrapper = styled.article`
   display: grid;
   grid-template-areas:
-    'image heading'
-    'image abstract';
+    "image heading"
+    "image abstract";
   gap: 4px 16px;
   grid-template-columns: 120px 1fr;
   color: var(--color-gray-900);
+`;
+
+const StyledLink = styled.a`
+  &:not(:first-of-type) {
+    margin-top: 16px;
+  }
+
+  &:not(:last-of-type) ${Abstract} {
+    margin-bottom: 20px;
+  }
+
+  &:not(:last-of-type) {
+    border-bottom: 1px solid var(--color-gray-300);
+  }
 `;
 
 const Image = styled.img`
@@ -39,12 +64,6 @@ const Heading = styled.h2`
   line-height: 1.3;
   /* Optical alignment */
   margin-top: -2px;
-`;
-
-const Abstract = styled.p`
-  grid-area: abstract;
-  font-size: 1rem;
-  white-space: pre-wrap;
 `;
 
 export default SecondaryStory;
